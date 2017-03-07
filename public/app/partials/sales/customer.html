@@ -1,0 +1,97 @@
+<div class="row">
+	<div class="col-md-6 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Clientes Registrados</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="table-responsive">
+					<table class="table table-striped jambo_table bulk_action">
+						<thead class="headings">
+							<tr>
+								<th>#</th>
+								<th>Nombre</th>
+								<th>Id</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>                    
+								<th>Correo</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even pointer" ng-repeat="customer in customers | paginate" ng-class="{selectelement:customerselected.id==customer.id}">
+								<td>{{$index}}</td>
+								<td>{{customer.Nombre}}</td>
+								<td>{{customer.Id}}</td>
+								<td>{{customer.Direccion}}</td>
+								<td>{{customer.Telefono}}</td>
+                                <td>{{customer.Correo}}</td>
+								<td ng-click="selectedcustomer(customer,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+								<td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selectedcustomer(customer,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<paginator></paginator>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+    
+				<h2>Registrar cliente</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<form class="form-horizontal form-label-left">
+					<p></p>
+				
+					<label for="fullname">Nombres Completo <span class="required">*</span></label>
+					<input type="text" id="fullname" class="form-control" ngfocus ng-model="editcustomer.fullname" validate="text-number" required>
+                            
+					<label for="numberid">Id Cliente <span class="required">*</span></label>
+					<input type="number" id="numberid" class="form-control" ngfocus ng-model="editcustomer.numberid" validate="number" required>
+
+                    <label for="address">Direccion <span class="required">*</span></label>
+					<input type="text" id="address" class="form-control" ngfocus ng-model="editcustomer.address" validate="text-number" required>
+
+                    <label for="phone">Telefono <span class="required">*</span></label>
+					<input type="text" id="phone" class="form-control" ngfocus ng-model="editcustomer.phone" validate="text-number" required>
+
+					<label for="email">Correo <span class="required">*</span></label>
+					<input type="email" id="email" class="form-control" ngfocus ng-model="editcustomer.email" validate="mail" required>
+
+					
+
+					<div class="ln_solid"></div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<button type="button" class="btn btn-default" ng-click="newcustomer()" title="Limpiar clientes">Cancelar</button>
+						<button type="button" class="btn btn-primary" ng-disabled="validatecustomer()" ng-click="savecustomer()" title="Guardar">Guardar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modaldeletecustomer" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Eliminar usuario</h4>
+			</div>
+			<div class="modal-body">
+				<p>¿Esta seguro de eliminar el Usuario?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+				<button type="button" class="btn btn-danger" ng-click="deletecustomer()" title="Eliminar">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>
